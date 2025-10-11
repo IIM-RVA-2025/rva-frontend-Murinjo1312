@@ -20,18 +20,16 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatCardModule } from '@angular/material/card';
 import { PutnikListComponent } from './components/putnik-list/putnik-list.component';
 
-
-
 @NgModule({
-declarations: [
-  AppComponent,
-  AranzmanListComponent,
-  DestinacijaListComponent,
-  RezervacijaListComponent,
-  NavbarComponent,
-  HomeComponent,
-  PutnikListComponent
-],
+  declarations: [
+    AppComponent,
+    AranzmanListComponent,
+    DestinacijaListComponent,
+    RezervacijaListComponent,
+    NavbarComponent,
+    HomeComponent,
+    PutnikListComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -46,7 +44,6 @@ declarations: [
     MatPaginatorModule,
     MatSortModule,
     MatCardModule
-
   ],
   providers: [],
   bootstrap: [AppComponent]
