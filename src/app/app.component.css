@@ -1,0 +1,84 @@
+/* Glavni kontejner za svaku tabelu */
+.table-container {
+  margin: 30px auto;
+  max-width: 90%;
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 20px 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Naslov tabele */
+.table-container h2 {
+  color: #24792e;
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+
+/* Angular Material tabela */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+/* Header red tabele */
+.mat-header-cell {
+  background-color: #24792e;
+  color: white;
+  font-weight: 600;
+  padding: 14px 10px;
+  font-size: 14px;
+}
+
+/* Obični redovi */
+.mat-cell {
+  padding: 12px 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Red naizmenične boje */
+.mat-row:nth-child(even) {
+  background-color: #f7f7f7;
+}
+
+/* Hover efekat */
+.mat-row:hover {
+  background-color: #e9f5ec;
+  transition: background-color 0.2s ease-in-out;
+}
+
+/* Podešavanje paginacije */
+mat-paginator {
+  margin-top: 10px;
+  background-color: #f3f3f3;
+  border-radius: 8px;
+  padding: 5px;
+}
+
+/* Stil za mat-card oko tabele */
+mat-card {
+  border-radius: 15px;
+  background-color: #ffffff;
+}
+
+/* Sorting strelice */
+.mat-sort-header-arrow {
+  color: white !important;
+}
+
+/* Responsive za manje ekrane */
+@media (max-width: 768px) {
+  .table-container {
+    padding: 10px;
+  }
+
+  .mat-header-cell,
+  .mat-cell {
+    font-size: 12px;
+    padding: 8px;
+  }
+}

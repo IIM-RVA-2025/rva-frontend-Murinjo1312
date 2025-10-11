@@ -1,0 +1,63 @@
+.hero-section {
+  background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e');
+  background-size: cover;
+  background-position: center;
+  height: 90vh;
+  position: relative;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.overlay {
+  background: rgba(0, 0, 0, 0.55);
+  padding: 50px;
+  border-radius: 15px;
+}
+
+.hero-section h1 {
+  font-size: 48px;
+  margin-bottom: 15px;
+  letter-spacing: 1px;
+}
+
+.hero-section p {
+  font-size: 20px;
+  margin-bottom: 25px;
+}
+
+.btn-primary {
+  background-color: #0077b6;
+  color: white;
+  padding: 12px 25px;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #023e8a;
+}
+
+.info-section {
+  padding: 60px 100px;
+  text-align: center;
+  color: #333;
+}
+
+.info-section h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: #0077b6;
+}
+
+footer {
+  background-color: #0077b6;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  font-size: 14px;
+}
