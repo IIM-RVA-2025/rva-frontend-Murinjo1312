@@ -1,0 +1,71 @@
+<h2>Destinacije</h2>
+
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+    <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="naziv">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Naziv</th>
+    <td mat-cell *matCellDef="let element">{{ element.naziv }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="drzava">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Država</th>
+    <td mat-cell *matCellDef="let element">{{ element.drzava }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="prosecna_ocena">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Prosečna ocena</th>
+    <td mat-cell *matCellDef="let element">{{ element.prosecna_ocena }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="akcije">
+    <th mat-header-cell *matHeaderCellDef>Akcije</th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-button color="primary" (click)="zapocniIzmenu(element)">Uredi</button>
+      <button mat-button color="warn" (click)="obrisiDestinaciju(element.id)">Obriši</button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<mat-paginator [pageSize]="5"></mat-paginator>
+
+<hr>
+
+<h3 *ngIf="!izmenaMode">Dodaj destinaciju</h3>
+<h3 *ngIf="izmenaMode">Izmeni destinaciju</h3>
+
+<form (ngSubmit)="izmenaMode ? sacuvajIzmene() : dodajDestinaciju()" class="destinacija-form">
+  <mat-form-field>
+    <mat-label>Naziv</mat-label>
+    <input matInput [(ngModel)]="novaDestinacija.naziv" name="naziv" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Država</mat-label>
+    <input matInput [(ngModel)]="novaDestinacija.drzava" name="drzava" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Opis</mat-label>
+    <input matInput [(ngModel)]="novaDestinacija.opis" name="opis">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Prosečna ocena</mat-label>
+    <input matInput type="number" [(ngModel)]="novaDestinacija.prosecna_ocena" name="prosecna_ocena" min="0" max="5">
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit">
+    {{ izmenaMode ? 'Sačuvaj izmene' : 'Dodaj' }}
+  </button>
+
+  <button *ngIf="izmenaMode" mat-raised-button color="warn" type="button" (click)="izmenaMode = false; novaDestinacija = {id: 0, naziv: '', drzava: '', opis: '', prosecna_ocena: 0}">
+    Odustani
+  </button>
+</form>

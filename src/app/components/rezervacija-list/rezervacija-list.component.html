@@ -1,0 +1,116 @@
+<div class="container">
+  <h2>Rezervacije</h2>
+
+  <!-- 🔹 Forma za dodavanje nove rezervacije -->
+  <form (ngSubmit)="dodajRezervaciju()" class="forma-rezervacija">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Broj osoba</mat-label>
+      <input matInput type="number" [(ngModel)]="novaRezervacija.broj_osoba" name="broj_osoba" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Datum rezervacije</mat-label>
+      <input matInput type="date" [(ngModel)]="novaRezervacija.datum_rezervacije" name="datum_rezervacije" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Ukupna cena (€)</mat-label>
+      <input matInput type="number" [(ngModel)]="novaRezervacija.ukupna_cena" name="ukupna_cena" required>
+    </mat-form-field>
+
+    <mat-checkbox [(ngModel)]="novaRezervacija.potvrdjena" name="potvrdjena">
+      Potvrđena
+    </mat-checkbox>
+
+    <!-- 🔹 Dropdown za odabir aranžmana -->
+    <mat-form-field appearance="outline">
+      <mat-label>Aranžman</mat-label>
+      <mat-select [(ngModel)]="novaRezervacija.aranzman.id" name="aranzman" required>
+        <mat-option [value]="0" disabled>Odaberi aranžman</mat-option>
+        <mat-option *ngFor="let a of aranzmani" [value]="a.id">
+          {{ a.naziv }} ({{ a.cena }} €)
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- 🔹 Dropdown za odabir putnika -->
+    <mat-form-field appearance="outline">
+      <mat-label>Putnik</mat-label>
+      <mat-select [(ngModel)]="novaRezervacija.putnik.id" name="putnik" required>
+        <mat-option [value]="0" disabled>Odaberi putnika</mat-option>
+        <mat-option *ngFor="let p of putnici" [value]="p.id">
+          {{ p.ime }} {{ p.prezime }} ({{ p.brojPasosa }})
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="dugmad">
+      <button mat-raised-button color="primary" type="submit">Dodaj rezervaciju</button>
+      <button mat-stroked-button color="warn" type="button" (click)="resetForm()">Resetuj</button>
+    </div>
+
+  </form>
+
+  <hr>
+
+  <!-- 🔹 Tabela svih rezervacija -->
+  <table mat-table [dataSource]="rezervacije" class="mat-elevation-z8">
+
+    <!-- ID -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <td mat-cell *matCellDef="let r">{{ r.id }}</td>
+    </ng-container>
+
+    <!-- Broj osoba -->
+    <ng-container matColumnDef="broj_osoba">
+      <th mat-header-cell *matHeaderCellDef>Broj osoba</th>
+      <td mat-cell *matCellDef="let r">{{ r.broj_osoba }}</td>
+    </ng-container>
+
+    <!-- Datum rezervacije -->
+    <ng-container matColumnDef="datum_rezervacije">
+      <th mat-header-cell *matHeaderCellDef>Datum</th>
+      <td mat-cell *matCellDef="let r">{{ r.datum_rezervacije | date: 'yyyy-MM-dd' }}</td>
+    </ng-container>
+
+    <!-- Ukupna cena -->
+    <ng-container matColumnDef="ukupna_cena">
+      <th mat-header-cell *matHeaderCellDef>Cena (€)</th>
+      <td mat-cell *matCellDef="let r">{{ r.ukupna_cena }}</td>
+    </ng-container>
+
+    <!-- Potvrđena -->
+    <ng-container matColumnDef="potvrdjena">
+      <th mat-header-cell *matHeaderCellDef>Potvrđena</th>
+      <td mat-cell *matCellDef="let r">{{ r.potvrdjena ? 'Da' : 'Ne' }}</td>
+    </ng-container>
+
+    <!-- Aranžman -->
+    <ng-container matColumnDef="aranzman">
+      <th mat-header-cell *matHeaderCellDef>Aranžman</th>
+      <td mat-cell *matCellDef="let r">{{ r.aranzman?.naziv }}</td>
+    </ng-container>
+
+    <!-- Putnik -->
+    <ng-container matColumnDef="putnik">
+      <th mat-header-cell *matHeaderCellDef>Putnik</th>
+      <td mat-cell *matCellDef="let r">{{ r.putnik?.ime }} {{ r.putnik?.prezime }}</td>
+    </ng-container>
+
+    <!-- Akcije -->
+    <ng-container matColumnDef="akcije">
+      <th mat-header-cell *matHeaderCellDef>Akcije</th>
+      <td mat-cell *matCellDef="let r">
+        <button mat-icon-button color="warn" (click)="obrisiRezervaciju(r.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="['id','broj_osoba','datum_rezervacije','ukupna_cena','potvrdjena','aranzman','putnik','akcije']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['id','broj_osoba','datum_rezervacije','ukupna_cena','potvrdjena','aranzman','putnik','akcije'];"></tr>
+
+  </table>
+</div>

@@ -1,30 +1,67 @@
-<mat-card class="table-container">
-  <h2>Putnici</h2>
+<h2>Putnici</h2>
 
-  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
-      <td mat-cell *matCellDef="let p">{{ p.id }}</td>
-    </ng-container>
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+    <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+  </ng-container>
 
-    <ng-container matColumnDef="ime">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Ime</th>
-      <td mat-cell *matCellDef="let p">{{ p.ime }}</td>
-    </ng-container>
+  <ng-container matColumnDef="ime">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Ime</th>
+    <td mat-cell *matCellDef="let element">{{ element.ime }}</td>
+  </ng-container>
 
-    <ng-container matColumnDef="prezime">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Prezime</th>
-      <td mat-cell *matCellDef="let p">{{ p.prezime }}</td>
-    </ng-container>
+  <ng-container matColumnDef="prezime">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Prezime</th>
+    <td mat-cell *matCellDef="let element">{{ element.prezime }}</td>
+  </ng-container>
 
-    <ng-container matColumnDef="broj_pasosa">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Broj pasoša</th>
-      <td mat-cell *matCellDef="let p">{{ p.broj_pasosa }}</td>
-    </ng-container>
+  <ng-container matColumnDef="brojPasosa">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Broj pasoša</th>
+    <td mat-cell *matCellDef="let element">{{ element.brojPasosa }}</td>
+  </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+  <ng-container matColumnDef="akcije">
+    <th mat-header-cell *matHeaderCellDef>Akcije</th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-button color="primary" (click)="zapocniIzmenu(element)">Uredi</button>
+      <button mat-button color="warn" (click)="obrisiPutnika(element.id)">Obriši</button>
+    </td>
+  </ng-container>
 
-  <mat-paginator [pageSize]="5"></mat-paginator>
-</mat-card>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<mat-paginator [pageSize]="5"></mat-paginator>
+
+<hr>
+
+<h3 *ngIf="!izmenaMode">Dodaj putnika</h3>
+<h3 *ngIf="izmenaMode">Izmeni putnika</h3>
+
+<form (ngSubmit)="izmenaMode ? sacuvajIzmene() : dodajPutnika()" class="putnik-form">
+
+  <mat-form-field>
+    <mat-label>Ime</mat-label>
+    <input matInput [(ngModel)]="noviPutnik.ime" name="ime" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Prezime</mat-label>
+    <input matInput [(ngModel)]="noviPutnik.prezime" name="prezime" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Broj pasoša</mat-label>
+    <input matInput [(ngModel)]="noviPutnik.brojPasosa" name="brojPasosa" required>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit">
+    {{ izmenaMode ? 'Sačuvaj izmene' : 'Dodaj' }}
+  </button>
+
+  <button *ngIf="izmenaMode" mat-raised-button color="warn" type="button" (click)="resetForm()">
+    Odustani
+  </button>
+</form>

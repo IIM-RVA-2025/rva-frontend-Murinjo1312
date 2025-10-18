@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PutnikListComponent } from './components/putnik-list/putnik-list.component';
 import { AranzmanListComponent } from './aranzman-list/aranzman-list.component';
-import { DestinacijaListComponent } from './destinacija-list/destinacija-list.component';
-import { RezervacijaListComponent } from './rezervacija-list/rezervacija-list.component';
+import { DestinacijaListComponent } from './components/destinacija-list/destinacija-list.component';
+import { RezervacijaListComponent } from './components/rezervacija-list/rezervacija-list.component';
 import { HomeComponent } from './home/home.component';
 
 

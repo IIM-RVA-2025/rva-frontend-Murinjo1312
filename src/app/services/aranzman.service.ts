@@ -5,12 +5,12 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class RezervacijaService {
-  private apiUrl = 'http://localhost:8080/rezervacije'; // endpoint backend-a
+export class AranzmanService {
+  private apiUrl = 'http://localhost:8080/api/aranzmani'; // endpoint iz backenda
 
   constructor(private http: HttpClient) {}
 
-  getRezervacije(): Observable<any[]> {
+  getAranzmani(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
   }
 }
